@@ -20,7 +20,7 @@ We have provided some basic scaffolding for you to get started including a worki
 - Add a Doctor model, with the following properties: id, name
 - Add an Appointments model, with the following properties: patientId, doctorId, appointmentDate
 - Update the Doctor and Patient models to include a list of appointments; define all the foreign keys and relevant model properties
-- Can you make it so that the primary key for the Appointments model is a composite key of patientId and doctorId?
+- Can you make it so that the primary key for the Appointments model is a composite key of patientId and doctorId? Should you? What are the implications of doing this?
 - Add minimal repositories and controllers to allow you to run the code and have it build the tables in the database.
 - Create some data and then check that the links etc are correctly implemented.
 
