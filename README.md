@@ -8,7 +8,7 @@ We have provided some basic scaffolding for you to get started including a worki
 
 ## Core Criteria
 
-### Part 1: Database Setup & Patient model
+### Part 1: Patient model
 
 - Create a `Patient` model to which maps to a suitable table name, primary key and column names. Make sure to use good naming conventions for postgres.
 - Add a suitable `PatientRepository` class (actually an interface)
