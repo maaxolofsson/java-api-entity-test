@@ -1,6 +1,8 @@
 package com.booleanuk.api.controller;
 
+import com.booleanuk.api.model.Appointment;
 import com.booleanuk.api.model.Doctor;
+import com.booleanuk.api.repository.AppointmentRepository;
 import com.booleanuk.api.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ public class DoctorController {
 
     @Autowired
     private DoctorRepository doctors;
+
+    @Autowired
+    private AppointmentRepository appointments;
 
     @GetMapping
     public ResponseEntity<List<Doctor>> getAll() {
@@ -60,6 +65,16 @@ public class DoctorController {
         this.doctors.delete(toDelete);
 
         return new ResponseEntity<>(toDelete, HttpStatus.OK);
+    }
+
+    @GetMapping("{id}/appointments")
+    public ResponseEntity<Appointment> getAppointsments(@PathVariable(name = "id") int id) {
+        Doctor doctor = this.doctors.findById(id)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+                );
+
+        return new ResponseEntity<>(this.appointments.findAllByDoctorId(id), HttpStatus.OK);
     }
 
 
