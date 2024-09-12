@@ -37,6 +37,11 @@ public class PatientController {
         return new ResponseEntity<>(this.patients.save(patient), HttpStatus.CREATED);
     }
 
+    @PostMapping("/bulk")
+    public ResponseEntity<List<Patient>> createBulk(@RequestBody List<Patient> patients) {
+        return new ResponseEntity<>(this.patients.saveAll(patients), HttpStatus.CREATED);
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Patient> delete(@PathVariable(name = "id") int id) {
         Patient toDelete = this.patients.findById(id)
@@ -58,7 +63,7 @@ public class PatientController {
         toUpdate.setFirstName(newData.getFirstName());
         toUpdate.setLastName(newData.getLastName());
 
-        return new ResponseEntity<>(this.patients.save(toUpdate), HttpStatus.OK);
+        return new ResponseEntity<>(this.patients.save(toUpdate), HttpStatus.CREATED);
     }
 
 }
