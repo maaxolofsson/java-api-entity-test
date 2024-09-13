@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,11 @@ public class AppointmentController {
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
                 );
 
+        // Checks if the doctor or patient has a booked appointment at that time
+        if (!this.checkAvailability(doctor, patient, toAdd.getAppointmentDate())) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
         toAdd.setDoctor(doctor);
         toAdd.setPatient(patient);
 
@@ -46,6 +52,22 @@ public class AppointmentController {
         patient.addAppointment(toAdd);
 
         return new ResponseEntity<>(this.appointments.save(toAdd), HttpStatus.CREATED);
+    }
+
+    private boolean checkAvailability(Doctor doctor, Patient patient, LocalDateTime dateAndTime) {
+        for (Appointment a : doctor.getAppointments()) {
+            if (a.getAppointmentDate().toString().equals(dateAndTime.toString())) {
+                return false;
+            }
+        }
+
+        for (Appointment a : patient.getAppointments()) {
+            if (a.getAppointmentDate().toString().equals(dateAndTime.toString())) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     @GetMapping
