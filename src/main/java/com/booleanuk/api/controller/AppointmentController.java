@@ -59,4 +59,14 @@ public class AppointmentController {
         return new ResponseEntity<>(toReturn, HttpStatus.OK);
     }
 
+    @GetMapping("/doctors/{id}")
+    public ResponseEntity<List<Appointment>> getAppointments(@PathVariable(name = "id") int id) {
+        Doctor doctor = this.doctors.findById(id)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+                );
+
+        return new ResponseEntity<>(this.appointments.findAllBydoctorId(id), HttpStatus.OK);
+    }
+
 }
