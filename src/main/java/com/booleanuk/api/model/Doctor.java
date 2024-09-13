@@ -25,8 +25,17 @@ public class Doctor {
     @Column
     private String name;
 
+    @OneToMany
+    @JoinColumn(name = "appointment_id")
+    @JsonIgnoreProperties("doctor")
+    private List<Appointment> appointments;
+
     public Doctor(int id) {
         this.id = id;
+    }
+
+    public void addAppointment(Appointment a) {
+        this.appointments.add(a);
     }
 
 }

@@ -42,7 +42,8 @@ public class AppointmentController {
         toAdd.setDoctor(doctor);
         toAdd.setPatient(patient);
 
-
+        doctor.addAppointment(toAdd);
+        patient.addAppointment(toAdd);
 
         return new ResponseEntity<>(this.appointments.save(toAdd), HttpStatus.CREATED);
     }
