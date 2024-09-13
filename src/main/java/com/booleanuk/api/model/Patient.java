@@ -9,8 +9,8 @@ import lombok.Setter;
 
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -34,5 +34,10 @@ public class Patient {
     @JoinColumn(name = "appointment_id")
     @JsonIgnoreProperties("patientId")
     private List<Appointment> appointments;
+
+    public Patient(int id) {
+        this.id = id;
+    }
+
 
 }

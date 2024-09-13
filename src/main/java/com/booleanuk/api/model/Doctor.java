@@ -12,8 +12,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "doctors")
 public class Doctor {
@@ -29,5 +29,9 @@ public class Doctor {
     @JoinColumn(name = "appointment_id")
     @JsonIgnoreProperties("doctorId")
     private List<Appointment> appointments;
+
+    public Doctor(int id) {
+        this.id = id;
+    }
 
 }
