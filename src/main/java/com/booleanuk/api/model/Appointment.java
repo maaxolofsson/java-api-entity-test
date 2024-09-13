@@ -26,12 +26,12 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "patient_id")
     @JsonIgnoreProperties("appointments")
-    private Patient patientId;
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     @JsonIgnoreProperties("appointments")
-    private Doctor doctorId;
+    private Doctor doctor;
 
     @Column
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
