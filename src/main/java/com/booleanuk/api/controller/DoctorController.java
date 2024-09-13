@@ -68,13 +68,13 @@ public class DoctorController {
     }
 
     @GetMapping("{id}/appointments")
-    public ResponseEntity<Appointment> getAppointsments(@PathVariable(name = "id") int id) {
+    public ResponseEntity<List<Appointment>> getAppointments(@PathVariable(name = "id") int id) {
         Doctor doctor = this.doctors.findById(id)
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
                 );
 
-        return new ResponseEntity<>(this.appointments.findAllByDoctorId(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.appointments.findAllBydoctorId(id), HttpStatus.OK);
     }
 
 
