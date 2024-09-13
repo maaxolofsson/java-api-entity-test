@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "prescriptions")
@@ -21,17 +22,12 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany
-    @JoinColumn(name = "medicine_id")
-    @JsonIgnoreProperties("prescriptions")
-    private List<Medicine> medicines;
-
     @OneToOne
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
-    public void addMedicine(Medicine m) {
-        this.medicines.add(m);
-    }
+    @ElementCollection
+    @MapKeyColumn(name = "medicine_id")
+    private Map<Integer, Integer> medicines; // medicine quantity for this prescription. key = medicine_id, value =
 
 }
