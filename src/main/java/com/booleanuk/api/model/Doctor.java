@@ -25,11 +25,6 @@ public class Doctor {
     @Column
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "appointment_id")
-    @JsonIgnoreProperties("doctorId")
-    private List<Appointment> appointments;
-
     public Doctor(int id) {
         this.id = id;
     }

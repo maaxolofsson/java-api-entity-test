@@ -30,11 +30,6 @@ public class Patient {
     @Column
     private String dob;
 
-    @OneToMany
-    @JoinColumn(name = "appointment_id")
-    @JsonIgnoreProperties("patientId")
-    private List<Appointment> appointments;
-
     public Patient(int id) {
         this.id = id;
     }
