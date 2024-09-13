@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
     public List<Appointment> findAllBydoctorId(int doctorId);
+
+    public List<Appointment> findAllBypatientId(int patientId);
 }
